@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Elo",
             "Mordeczko"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
@@ -41,11 +41,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.PlikTool = new System.Windows.Forms.ToolStripMenuItem();
             this.AddRecordTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshListTool = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteRekordTool = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsXMLTool = new System.Windows.Forms.ToolStripMenuItem();
             this.wyszukajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchToolTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.RefreshListTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitTool = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxSurname = new System.Windows.Forms.TextBox();
@@ -67,8 +68,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.ExitTool = new System.Windows.Forms.ToolStripMenuItem();
             this.label7 = new System.Windows.Forms.Label();
+            this.userControl11 = new Zegar.UserControl1();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -85,12 +86,12 @@
             this.Email,
             this.PhoneNumber});
             this.personalDataList.HideSelection = false;
-            listViewItem1.Tag = "Elo";
+            listViewItem3.Tag = "Elo";
             this.personalDataList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.personalDataList.Location = new System.Drawing.Point(235, 38);
             this.personalDataList.Name = "personalDataList";
-            this.personalDataList.Size = new System.Drawing.Size(556, 459);
+            this.personalDataList.Size = new System.Drawing.Size(607, 459);
             this.personalDataList.TabIndex = 0;
             this.personalDataList.UseCompatibleStateImageBehavior = false;
             this.personalDataList.View = System.Windows.Forms.View.Details;
@@ -98,17 +99,17 @@
             // PersonName
             // 
             this.PersonName.Text = "Name";
-            this.PersonName.Width = 120;
+            this.PersonName.Width = 140;
             // 
             // Surname
             // 
             this.Surname.Text = "Surname";
-            this.Surname.Width = 120;
+            this.Surname.Width = 140;
             // 
             // BirthDate
             // 
             this.BirthDate.Text = "Birth Date";
-            this.BirthDate.Width = 70;
+            this.BirthDate.Width = 80;
             // 
             // Email
             // 
@@ -128,7 +129,7 @@
             this.ExitTool});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(802, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(854, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -146,19 +147,25 @@
             // AddRecordTool
             // 
             this.AddRecordTool.Name = "AddRecordTool";
-            this.AddRecordTool.Size = new System.Drawing.Size(180, 22);
+            this.AddRecordTool.Size = new System.Drawing.Size(159, 22);
             this.AddRecordTool.Text = "Dodaj rekord";
+            // 
+            // RefreshListTool
+            // 
+            this.RefreshListTool.Name = "RefreshListTool";
+            this.RefreshListTool.Size = new System.Drawing.Size(159, 22);
+            this.RefreshListTool.Text = "Odśwież listę";
             // 
             // DeleteRekordTool
             // 
             this.DeleteRekordTool.Name = "DeleteRekordTool";
-            this.DeleteRekordTool.Size = new System.Drawing.Size(180, 22);
+            this.DeleteRekordTool.Size = new System.Drawing.Size(159, 22);
             this.DeleteRekordTool.Text = "Usuń rekordy";
             // 
             // SaveAsXMLTool
             // 
             this.SaveAsXMLTool.Name = "SaveAsXMLTool";
-            this.SaveAsXMLTool.Size = new System.Drawing.Size(180, 22);
+            this.SaveAsXMLTool.Size = new System.Drawing.Size(159, 22);
             this.SaveAsXMLTool.Text = "Zapisz jako XML";
             // 
             // wyszukajToolStripMenuItem
@@ -175,11 +182,12 @@
             this.SearchToolTextBox.Name = "SearchToolTextBox";
             this.SearchToolTextBox.Size = new System.Drawing.Size(100, 23);
             // 
-            // RefreshListTool
+            // ExitTool
             // 
-            this.RefreshListTool.Name = "RefreshListTool";
-            this.RefreshListTool.Size = new System.Drawing.Size(180, 22);
-            this.RefreshListTool.Text = "Odśwież listę";
+            this.ExitTool.Name = "ExitTool";
+            this.ExitTool.Size = new System.Drawing.Size(59, 20);
+            this.ExitTool.Text = "Wyjście";
+            this.ExitTool.Click += new System.EventHandler(this.ExitTool_Click);
             // 
             // label2
             // 
@@ -333,11 +341,12 @@
             this.ExitButton.TabIndex = 19;
             this.ExitButton.Text = "Wyjście";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(407, 503);
+            this.pictureBox1.Location = new System.Drawing.Point(495, 500);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(60, 60);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -347,7 +356,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(473, 503);
+            this.pictureBox2.Location = new System.Drawing.Point(561, 500);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(60, 60);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -357,7 +366,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(341, 503);
+            this.pictureBox3.Location = new System.Drawing.Point(429, 500);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(60, 60);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -367,34 +376,37 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(275, 503);
+            this.pictureBox4.Location = new System.Drawing.Point(363, 500);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(60, 60);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 23;
             this.pictureBox4.TabStop = false;
             // 
-            // ExitTool
-            // 
-            this.ExitTool.Name = "ExitTool";
-            this.ExitTool.Size = new System.Drawing.Size(59, 20);
-            this.ExitTool.Text = "Wyjście";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(539, 513);
+            this.label7.Location = new System.Drawing.Point(627, 510);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(215, 39);
             this.label7.TabIndex = 24;
             this.label7.Text = "Tele-Książka";
             // 
+            // userControl11
+            // 
+            this.userControl11.Location = new System.Drawing.Point(236, 510);
+            this.userControl11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.userControl11.Name = "userControl11";
+            this.userControl11.Size = new System.Drawing.Size(120, 50);
+            this.userControl11.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 572);
+            this.ClientSize = new System.Drawing.Size(854, 572);
+            this.Controls.Add(this.userControl11);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
@@ -419,7 +431,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.personalDataList);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ksiazka teleadresowa";
@@ -473,6 +487,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.ToolStripMenuItem ExitTool;
         private System.Windows.Forms.Label label7;
+        private Zegar.UserControl1 userControl11;
     }
 }
 
