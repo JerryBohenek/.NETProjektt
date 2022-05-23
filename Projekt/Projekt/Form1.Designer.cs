@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Elo",
-            "Mordeczko"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.personalDataList = new System.Windows.Forms.ListView();
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PersonName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Surname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BirthDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -70,6 +68,8 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.userControl11 = new Zegar.UserControl1();
+            this.label8 = new System.Windows.Forms.Label();
+            this.DeleteAllTool = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -80,21 +80,24 @@
             // personalDataList
             // 
             this.personalDataList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ID,
             this.PersonName,
             this.Surname,
             this.BirthDate,
             this.Email,
             this.PhoneNumber});
             this.personalDataList.HideSelection = false;
-            listViewItem3.Tag = "Elo";
-            this.personalDataList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
             this.personalDataList.Location = new System.Drawing.Point(235, 38);
             this.personalDataList.Name = "personalDataList";
-            this.personalDataList.Size = new System.Drawing.Size(607, 459);
+            this.personalDataList.Size = new System.Drawing.Size(635, 459);
             this.personalDataList.TabIndex = 0;
             this.personalDataList.UseCompatibleStateImageBehavior = false;
             this.personalDataList.View = System.Windows.Forms.View.Details;
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
+            this.ID.Width = 30;
             // 
             // PersonName
             // 
@@ -129,7 +132,7 @@
             this.ExitTool});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(854, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(882, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -139,6 +142,7 @@
             this.AddRecordTool,
             this.RefreshListTool,
             this.DeleteRekordTool,
+            this.DeleteAllTool,
             this.SaveAsXMLTool});
             this.PlikTool.Name = "PlikTool";
             this.PlikTool.Size = new System.Drawing.Size(38, 20);
@@ -147,26 +151,30 @@
             // AddRecordTool
             // 
             this.AddRecordTool.Name = "AddRecordTool";
-            this.AddRecordTool.Size = new System.Drawing.Size(159, 22);
+            this.AddRecordTool.Size = new System.Drawing.Size(185, 22);
             this.AddRecordTool.Text = "Dodaj rekord";
+            this.AddRecordTool.Click += new System.EventHandler(this.AddRecordTool_Click);
             // 
             // RefreshListTool
             // 
             this.RefreshListTool.Name = "RefreshListTool";
-            this.RefreshListTool.Size = new System.Drawing.Size(159, 22);
+            this.RefreshListTool.Size = new System.Drawing.Size(185, 22);
             this.RefreshListTool.Text = "Odśwież listę";
+            this.RefreshListTool.Click += new System.EventHandler(this.RefreshListTool_Click);
             // 
             // DeleteRekordTool
             // 
             this.DeleteRekordTool.Name = "DeleteRekordTool";
-            this.DeleteRekordTool.Size = new System.Drawing.Size(159, 22);
+            this.DeleteRekordTool.Size = new System.Drawing.Size(185, 22);
             this.DeleteRekordTool.Text = "Usuń rekordy";
+            this.DeleteRekordTool.Click += new System.EventHandler(this.DeleteRekordTool_Click);
             // 
             // SaveAsXMLTool
             // 
             this.SaveAsXMLTool.Name = "SaveAsXMLTool";
-            this.SaveAsXMLTool.Size = new System.Drawing.Size(159, 22);
+            this.SaveAsXMLTool.Size = new System.Drawing.Size(185, 22);
             this.SaveAsXMLTool.Text = "Zapisz jako XML";
+            this.SaveAsXMLTool.Click += new System.EventHandler(this.SaveAsXMLTool_Click);
             // 
             // wyszukajToolStripMenuItem
             // 
@@ -175,12 +183,16 @@
             this.wyszukajToolStripMenuItem.Name = "wyszukajToolStripMenuItem";
             this.wyszukajToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.wyszukajToolStripMenuItem.Text = "Wyszukaj";
+            this.wyszukajToolStripMenuItem.DropDownClosed += new System.EventHandler(this.wyszukajToolStripMenuItem_DropDownClosed);
             // 
             // SearchToolTextBox
             // 
             this.SearchToolTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SearchToolTextBox.Name = "SearchToolTextBox";
             this.SearchToolTextBox.Size = new System.Drawing.Size(100, 23);
+            this.SearchToolTextBox.Text = "Wpisz tutaj...";
+            this.SearchToolTextBox.Click += new System.EventHandler(this.SearchToolTextBox_Click);
+            this.SearchToolTextBox.TextChanged += new System.EventHandler(this.SearchToolTextBox_TextChanged);
             // 
             // ExitTool
             // 
@@ -284,6 +296,7 @@
             this.AddRecordButton.TabIndex = 13;
             this.AddRecordButton.Text = "Dodaj rekord";
             this.AddRecordButton.UseVisualStyleBackColor = true;
+            this.AddRecordButton.Click += new System.EventHandler(this.AddRecordButton_Click);
             // 
             // SearchTextBox
             // 
@@ -291,6 +304,7 @@
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(214, 20);
             this.SearchTextBox.TabIndex = 15;
+            this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             // 
             // label6
             // 
@@ -311,6 +325,7 @@
             this.RefreshListButton.TabIndex = 16;
             this.RefreshListButton.Text = "Odśwież listę";
             this.RefreshListButton.UseVisualStyleBackColor = true;
+            this.RefreshListButton.Click += new System.EventHandler(this.RefreshListButton_Click);
             // 
             // DeleteRecordButton
             // 
@@ -321,6 +336,7 @@
             this.DeleteRecordButton.TabIndex = 17;
             this.DeleteRecordButton.Text = "Usuń rekord";
             this.DeleteRecordButton.UseVisualStyleBackColor = true;
+            this.DeleteRecordButton.Click += new System.EventHandler(this.DeleteRecordButton_Click);
             // 
             // SaveAsXMLButton
             // 
@@ -331,6 +347,7 @@
             this.SaveAsXMLButton.TabIndex = 18;
             this.SaveAsXMLButton.Text = "Zapisz jako XML";
             this.SaveAsXMLButton.UseVisualStyleBackColor = true;
+            this.SaveAsXMLButton.Click += new System.EventHandler(this.SaveAsXMLButton_Click);
             // 
             // ExitButton
             // 
@@ -346,7 +363,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(495, 500);
+            this.pictureBox1.Location = new System.Drawing.Point(523, 500);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(60, 60);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -356,7 +373,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(561, 500);
+            this.pictureBox2.Location = new System.Drawing.Point(589, 500);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(60, 60);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -366,7 +383,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(429, 500);
+            this.pictureBox3.Location = new System.Drawing.Point(457, 500);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(60, 60);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -376,7 +393,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(363, 500);
+            this.pictureBox4.Location = new System.Drawing.Point(391, 500);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(60, 60);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -387,7 +404,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(627, 510);
+            this.label7.Location = new System.Drawing.Point(655, 510);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(215, 39);
             this.label7.TabIndex = 24;
@@ -395,17 +412,33 @@
             // 
             // userControl11
             // 
-            this.userControl11.Location = new System.Drawing.Point(236, 510);
+            this.userControl11.Location = new System.Drawing.Point(255, 510);
             this.userControl11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(120, 50);
+            this.userControl11.Size = new System.Drawing.Size(109, 50);
             this.userControl11.TabIndex = 25;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 484);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(0, 13);
+            this.label8.TabIndex = 26;
+            // 
+            // DeleteAllTool
+            // 
+            this.DeleteAllTool.Name = "DeleteAllTool";
+            this.DeleteAllTool.Size = new System.Drawing.Size(185, 22);
+            this.DeleteAllTool.Text = "Wyzeruj bazę danych";
+            this.DeleteAllTool.Click += new System.EventHandler(this.DeleteAllTool_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 572);
+            this.ClientSize = new System.Drawing.Size(882, 572);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.userControl11);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.pictureBox4);
@@ -488,6 +521,9 @@
         private System.Windows.Forms.ToolStripMenuItem ExitTool;
         private System.Windows.Forms.Label label7;
         private Zegar.UserControl1 userControl11;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolStripMenuItem DeleteAllTool;
     }
 }
 
